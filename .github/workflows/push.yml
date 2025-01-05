@@ -29,7 +29,7 @@ jobs:
           REMOTE_KEY: ${{ secrets.REMOTE_KEY }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
         run: |
-          echo $REMOTE_KEY > private_key
+          echo "$REMOTE_KEY" > private_key
           chmod 600 private_key
           scp -o StrictHostKeyChecking=no -i private_key -P $REMOTE_PORT fbcal $REMOTE_USER@$REMOTE_HOST:/home/ilhan/fbcal
           rm private_key
