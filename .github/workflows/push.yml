@@ -1,0 +1,34 @@
+name: Build and Deploy
+
+on:
+	push:
+		branches:
+			- main
+
+jobs:
+	build:
+		runs-on: ubuntu-latest
+
+		steps:
+		- name: Checkout code
+			uses: actions/checkout@v2
+
+		- name: Set up Go
+			uses: actions/setup-go@v2
+			with:
+				go-version: '1.23'
+
+		- name: Build for Linux ARM64
+			run: GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o fbcal main.go event.go
+
+		- name: Upload to remote host
+			env:
+				REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+				REMOTE_USER: ${{ secrets.REMOTE_USER }}
+				REMOTE_KEY: ${{ secrets.REMOTE_KEY }}
+				REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+			run: |
+				echo "${REMOTE_KEY}" > private_key
+				chmod 600 private_key
+				scp -i private_key -P ${REMOTE_PORT} fbcal ${REMOTE_USER}@${REMOTE_HOST}:/home/ilhan/fbcal
+				rm private_key
