@@ -31,5 +31,5 @@ jobs:
         run: |
           echo $REMOTE_KEY > private_key
           chmod 600 private_key
-          scp -i private_key -P $REMOTE_PORT fbcal $REMOTE_USER@$REMOTE_HOST:/home/ilhan/fbcal
+          scp -o StrictHostKeyChecking=no -i private_key -P $REMOTE_PORT fbcal $REMOTE_USER@$REMOTE_HOST:/home/ilhan/fbcal
           rm private_key
