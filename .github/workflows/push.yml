@@ -3,11 +3,10 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
-    environment: env
     runs-on: ubuntu-latest
 
     steps:
@@ -32,6 +31,6 @@ jobs:
           echo "$REMOTE_KEY" > private_key
           chmod 600 private_key
           ssh -i private_key -o StrictHostKeyChecking=no -p $REMOTE_PORT $REMOTE_USER@$REMOTE_HOST "sudo systemctl stop fbcal"
-          scp -o StrictHostKeyChecking=no -i private_key -P $REMOTE_PORT fbcal $REMOTE_USER@$REMOTE_HOST:/home/ilhan/fbcal
+          scp -o StrictHostKeyChecking=no -i private_key -P $REMOTE_PORT fbcal $REMOTE_USER@$REMOTE_HOST:~/fbcal
           ssh -i private_key -o StrictHostKeyChecking=no -p $REMOTE_PORT $REMOTE_USER@$REMOTE_HOST "sudo systemctl start fbcal"
           rm private_key
