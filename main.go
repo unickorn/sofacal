@@ -34,9 +34,10 @@ func main() {
 			evs, err := CollectEvents()
 			if err != nil {
 				fmt.Println("Error collecting events:", err)
+				time.Sleep(Interval / 12) // Wait 1/12th of the interval to prevent spamming sofascore.
 				continue
 			}
-			fmt.Printf("%s | Collected %d events", time.Now().Format(time.RFC3339), len(evs))
+			fmt.Printf("%s | Collected %d events\n", time.Now().Format(time.RFC3339), len(evs))
 
 			// Setup the calendar
 			cal := ics.NewCalendar()
