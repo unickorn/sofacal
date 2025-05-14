@@ -36,6 +36,7 @@ func main() {
 				fmt.Println("Error collecting events:", err)
 				continue
 			}
+			fmt.Printf("%s | Collected %d events", time.Now().Format(time.RFC3339), len(evs))
 
 			// Setup the calendar
 			cal := ics.NewCalendar()
