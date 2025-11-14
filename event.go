@@ -24,6 +24,7 @@ func init() {
 	teams = []int{
 		3052, // Fenerbahce Football
 		3514, // Fenerbahce Basketball
+		4700, // Turkiye Football
 	}
 
 	if !useProxy {
