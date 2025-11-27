@@ -25,6 +25,7 @@ func init() {
 		3052, // Fenerbahce Football
 		3514, // Fenerbahce Basketball
 		4700, // Turkiye Football
+		6253, // Turkiye Basketball
 	}
 
 	if !useProxy {
